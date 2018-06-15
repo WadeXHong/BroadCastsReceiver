@@ -2,7 +2,8 @@
 * 因應 Android 8.0 以後新增的諸多限制所做的測試。
 
 # 重點整理
-* BroadCastsReveiver 註冊方式
+* BroadCastsReveiver 使用
+  * YOUR_RECEIVER.class extends BroadcastReceiver，覆寫 onReceive 決定收到廣播後的操作。
   * AndroidManifest.xml 裡在 <application 中用 <receiver 註冊，或在 Activity 裡面 用 registerReceiver(YOUR_RECEIVER, IntentFilter) 註冊；
   * 8.0 注意事項：
     * .xml裡註測時用 <intent-filter> 已經收不到大部分的 (implicit) 廣播，請寫在 Activity 裡。
