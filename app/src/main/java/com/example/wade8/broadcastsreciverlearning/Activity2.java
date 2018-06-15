@@ -15,18 +15,6 @@ public class Activity2 extends AppCompatActivity {
     private Button mSwitchToMainActivityButton;
     private MyReceiver mMyReceiver;
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +22,12 @@ public class Activity2 extends AppCompatActivity {
         setContentView(R.layout.activity_2);
 
         mMyReceiver = new MyReceiver();
+
+        // 8.0以後要收到 implicit broadcast在code裡面用IntentFilter加才有用喔
         IntentFilter intentFilter = new IntentFilter("com.example.wade8.broadcastreciverlearning.CHANGE_TEXT");
+        //選擇在 onCreate 和 onDestroy 做 register 和 unregister 是為了讓 Activity2 在切到下面 (onStop) 狀態下仍能收到廣播
         registerReceiver(mMyReceiver, intentFilter);
+
 
         mTextView = findViewById(R.id.textview);
         mFinishButton = findViewById(R.id.finish);

@@ -9,6 +9,7 @@ public class MyReceiver extends BroadcastReceiver {
 
     private final String TAG = MyReceiver.class.getSimpleName();
 
+
     @Override
     public void onReceive(Context context, Intent intent) {
         // TODO: This method is called when the BroadcastReceiver is receiving
@@ -16,19 +17,29 @@ public class MyReceiver extends BroadcastReceiver {
         Log.d(TAG, "onReceive executed");
 
 
-        if (intent.getAction().equals(Intent.ACTION_AIRPLANE_MODE_CHANGED)) {
+        // 看你收到的intent是啥
+        switch (intent.getAction()){
 
-            boolean state = intent.getBooleanExtra("state", false);
-            Log.d(TAG, "state : " + state);
+            case Intent.ACTION_AIRPLANE_MODE_CHANGED:
 
-        }else if (intent.getAction().equals("com.example.wade8.broadcastreciverlearning.CHANGE_TEXT")){
+                boolean state = intent.getBooleanExtra("state", false);
+                Log.d(TAG, "state : " + state);
 
-            Log.d(TAG, "CHANGE_TEXT");
-            ((Activity2)context).setText(intent.getStringExtra("content"));
+                break;
 
-        }else {
-            Log.d(TAG, "WTF?");
+            case "com.example.wade8.broadcastreciverlearning.CHANGE_TEXT":
+
+                //換Activity2裡面顯示的字
+                ((Activity2)context).setText(intent.getStringExtra("content"));
+                Log.d(TAG, "CHANGE_TEXT");
+
+                break;
+
+            default:
+                Log.d(TAG, "WTF ? 哪來奇怪的廣播 ??????????");
+
         }
+
 
 
 //        throw new UnsupportedOperationException("Not yet implemented");

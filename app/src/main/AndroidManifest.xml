@@ -3,8 +3,12 @@
     package="com.example.wade8.broadcastsreciverlearning">
 
     <!--<uses-permission android:name="android.permission.BROADCAST_STICKY" />-->
-    <uses-permission android:name="com.example.wade8.broadcastreciverlearning.PERMISSION"/>
-    <permission android:name="com.example.wade8.broadcastreciverlearning.PERMISSION"/>
+
+    <uses-permission android:name="com.example.wade8.broadcastreciverlearning.PERMISSION"/> <!--接收端如果要收到帶有權限要求的廣播，此行必須-->
+
+    <permission android:name="com.example.wade8.broadcastreciverlearning.PERMISSION"/>  <!--發送端如果需要發出帶有權限的廣播，此行必須-->
+
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,25 +16,29 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"
-            android:launchMode="singleInstance">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".Activity2"
-            android:launchMode="singleInstance">
-        </activity>
 
         <receiver
             android:name=".MyReceiver"
             >
             <intent-filter>
+                <!--Android 8.0以後，除非對方有指定這個package為接收廣播的對象，不然下面這行跟拉G一樣沒用，請在code裡面打^_^-->
                 <action android:name="com.example.wade8.broadcastreciverlearning.CHANGE_TEXT"/>
             </intent-filter>
         </receiver>
+
+        <activity android:name=".MainActivity"
+            android:launchMode="singleInstance">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".Activity2"
+            android:launchMode="singleInstance">
+        </activity>
+
+
 
     </application>
 

@@ -1,5 +1,6 @@
 package com.example.wade8.broadcastsreciverlearning;
 
+import android.content.ComponentName;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         mMyReceiver = new MyReceiver();
 
         mEditText = findViewById(R.id.editText);
@@ -31,11 +33,28 @@ public class MainActivity extends AppCompatActivity {
         mSendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                // 發送廣播的code在這裡
+
                 String content = mEditText.getText().toString();
+
                 Intent intent = new Intent();
+
+                // broadcast名稱
                 intent.setAction("com.example.wade8.broadcastreciverlearning.CHANGE_TEXT");
                 intent.putExtra("content", content);
+
+                // 如果你要讓你送出的廣播從 implicit -> explicit 就用下面的方法指定 packagename 和 receiver， 但是我試圖用這樣送給自己失敗 = =
+                //intent.setComponent(new ComponentName("com.example.wade8.broadcastreciverlearning", "com.example.wade8.broadcastreciverlearning.MyReceiver"));
+
+
+                // 不帶權限
+                sendBroadcast(intent);
+
+                // 帶權限 *需再 Manifest新增 <permission android:name="com.example.wade8.broadcastreciverlearning.PERMISSION"/>
+                //         同時用 sendBroadcast(Intent, 權限名稱String) ，具有權限的接收端才收的到，缺一不可。
                 sendBroadcast(intent, "com.example.wade8.broadcastreciverlearning.PERMISSION");
+
             }
         });
         mSwitchToActivity2Button.setOnClickListener(new View.OnClickListener() {
