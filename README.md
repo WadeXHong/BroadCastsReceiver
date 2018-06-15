@@ -4,9 +4,10 @@
 # 重點整理
 * BroadCastsReveiver 註冊方式
   * AndroidManifest.xml 裡在 <application 中用 <receiver 註冊，或在 Activity 裡面 用 registerReceiver(YOUR_RECEIVER, IntentFilter) 註冊；
-    * 8.0 注意事項：.xml裡註測時用 <intent-filter> 已經收不到大部分的 (implicit) 廣播，請寫在 Activity 裡。
-    *              registerReceiver、unregisterReceiver時機。
-    *              Permission。
+  * 8.0 注意事項：
+    * .xml裡註測時用 <intent-filter> 已經收不到大部分的 (implicit) 廣播，請寫在 Activity 裡。
+    * registerReceiver、unregisterReceiver時機。
+    * Permission。
     
 * Permission 權限
   * 若發送端添加權限，則 AndroidManifest.xml 要有該 <uses-permission 權限 不然收不到。
